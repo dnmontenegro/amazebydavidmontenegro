@@ -1,14 +1,16 @@
-package edu.wm.cs.cs301.DavidMontenegro;
+package edu.wm.cs.cs301.DavidMontenegro.gui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import edu.wm.cs.cs301.DavidMontenegro.R;
+
+public class FinishActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_finish);
     }
 }
