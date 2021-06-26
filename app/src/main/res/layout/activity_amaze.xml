@@ -7,12 +7,65 @@
     tools:context=".gui.AMazeActivity">
 
     <TextView
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="20sp"
+        android:padding="24dp"
+        android:textColor="@color/red"
+        app:layout_constraintBottom_toBottomOf="@id/tSize"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tSize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:padding="24dp"
+        android:textColor="@color/red"
+        app:layout_constraintBottom_toBottomOf="@id/tRooms"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/title" />
+
+    <TextView
+        android:id="@+id/tRooms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:padding="24dp"
+        android:textColor="@color/red"
+        app:layout_constraintBottom_toBottomOf="@id/tAlgorithm"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tSize" />
+
+    <TextView
+        android:id="@+id/tAlgorithm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:padding="24dp"
+        android:textColor="@color/red"
+        app:layout_constraintBottom_toBottomOf="@id/tMode"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tRooms" />
+
+    <TextView
+        android:id="@+id/tMode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:padding="24dp"
+        android:textColor="@color/red"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tAlgorithm" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
