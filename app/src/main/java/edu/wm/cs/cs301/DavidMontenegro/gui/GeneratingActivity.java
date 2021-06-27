@@ -23,6 +23,7 @@ public class GeneratingActivity extends AppCompatActivity {
     private boolean mazeRooms;
     private String mazeAlgorithm;
     private String mazeMode;
+    private Thread generation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +38,7 @@ public class GeneratingActivity extends AppCompatActivity {
         mazeAlgorithm = getIntent().getStringExtra("MazeAlgorithm");
         mazeMode = getIntent().getStringExtra("MazeMode");
 
-        new Thread(new Runnable() {
+        generation = new Thread(new Runnable() {
             @Override
             public void run() {
                 while(mazeProgress.getProgress() < 100) {
@@ -45,7 +46,7 @@ public class GeneratingActivity extends AppCompatActivity {
                         Thread.sleep(500);
                     }
                     catch (InterruptedException e) {
-                        e.printStackTrace();
+                        return;
                     }
                     mazeProgress.incrementProgressBy(5);
                     runOnUiThread(new Runnable() {
@@ -55,6 +56,12 @@ public class GeneratingActivity extends AppCompatActivity {
                         }
                     });
                 }
+                try {
+                    Thread.sleep(1000);
+                }
+                catch (InterruptedException e) {
+                    return;
+                }
                 Intent i;
                 if (mazeMode.equals(getString(R.string.Manual)))
                     i = new Intent(getApplicationContext(), PlayManuallyActivity.class);
@@ -62,10 +69,12 @@ public class GeneratingActivity extends AppCompatActivity {
                     i = new Intent(getApplicationContext(), PlayAnimationActivity.class);
                 startActivity(i);
             }
-        }).start();
+        });
+        generation.start();
     }
     @Override
     public void onBackPressed(){
+        generation.interrupt();
         Intent i = new Intent(getApplicationContext(), AMazeActivity.class);
         Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
         Log.v(getString(R.string.back), getString(R.string.inputDetected));

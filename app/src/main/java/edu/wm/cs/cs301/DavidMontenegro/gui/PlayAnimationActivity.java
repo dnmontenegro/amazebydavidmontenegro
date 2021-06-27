@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -20,9 +21,12 @@ public class PlayAnimationActivity extends AppCompatActivity {
     private ToggleButton solutionAni;
     private ToggleButton visibleWallsAni;
     private Button shortcutAni;
+    private TextView remainingEnergy;
+    private ProgressBar energyProgress;
     private Button start;
-    private int energy;
     private int path;
+    private int energy;
+    private boolean winOrLose;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +37,13 @@ public class PlayAnimationActivity extends AppCompatActivity {
         solutionAni = (ToggleButton) findViewById(R.id.solutionAni);
         visibleWallsAni = (ToggleButton) findViewById(R.id.visibleWallsAni);
         shortcutAni= (Button) findViewById(R.id.shortcutAni);
+        remainingEnergy = (TextView) findViewById(R.id.remainingEnergy);
+        energyProgress = (ProgressBar) findViewById(R.id.energyProgress);
         start = (Button) findViewById(R.id.start);
-        energy = 0;
         path = 0;
+        energy = 0;
+        winOrLose = true;
+        energyProgress.setProgress(100);
 
         wholeMazeAni.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -89,8 +97,9 @@ public class PlayAnimationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), FinishActivity.class);
-                i.putExtra("EnergyConsumption", energy);
                 i.putExtra("PathLength", path);
+                i.putExtra("EnergyConsumption", energy);
+                i.putExtra("WinOrLose", winOrLose);
                 Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
                 Log.v(getString(R.string.shortcut), getString(R.string.inputDetected));
                 startActivity(i);

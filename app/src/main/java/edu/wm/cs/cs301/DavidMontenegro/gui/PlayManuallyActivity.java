@@ -26,8 +26,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
     private Button jump;
     private Button right;
     private Button down;
-    private int energy;
-    private int path;
+    private boolean winOrLose;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +42,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
         jump = (Button) findViewById(R.id.jump);
         right = (Button) findViewById(R.id.right);
         down = (Button) findViewById(R.id.down);
-        energy = 0;
-        path = 0;
+        winOrLose = true;
 
         wholeMazeMan.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -98,8 +96,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), FinishActivity.class);
-                i.putExtra("EnergyConsumption", energy);
-                i.putExtra("PathLength", path);
+                i.putExtra("WinOrLose", winOrLose);
                 Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
                 Log.v(getString(R.string.shortcut), getString(R.string.inputDetected));
                 startActivity(i);
