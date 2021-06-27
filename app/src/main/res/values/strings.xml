@@ -17,6 +17,9 @@
     <string name="Wizard">Kruskal</string>
     <string name="revisit">Revisit</string>
     <string name="explore">Explore</string>
+    <string name="genProgress">Maze generation progress:</string>
+    <string name="genBack">Back</string>
+    <string name="percent">%1$d%%</string>
 
 
 </resources>
