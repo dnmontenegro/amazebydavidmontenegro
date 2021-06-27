@@ -7,18 +7,20 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import edu.wm.cs.cs301.DavidMontenegro.R;
 
 public class PlayManuallyActivity extends AppCompatActivity {
 
-    private Button wholeMaze;
-    private Button solution;
-    private Button visibleWalls;
-    private Button shortcut;
+    private ToggleButton wholeMazeMan;
+    private ToggleButton  solutionMan;
+    private ToggleButton  visibleWallsMan;
+    private Button shortcutMan;
     private Button up;
     private Button left;
     private Button jump;
@@ -32,10 +34,10 @@ public class PlayManuallyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_manually);
 
-        wholeMaze = (Button) findViewById(R.id.wholeMaze);
-        solution = (Button) findViewById(R.id.solution);
-        visibleWalls = (Button) findViewById(R.id.visibleWalls);
-        shortcut = (Button) findViewById(R.id.shortcut);
+        wholeMazeMan = (ToggleButton) findViewById(R.id.wholeMazeMan);
+        solutionMan = (ToggleButton) findViewById(R.id.solutionMan);
+        visibleWallsMan = (ToggleButton) findViewById(R.id.visibleWallsMan);
+        shortcutMan = (Button) findViewById(R.id.shortcutMan);
         up = (Button) findViewById(R.id.up);
         left = (Button) findViewById(R.id.left);
         jump = (Button) findViewById(R.id.jump);
@@ -44,7 +46,55 @@ public class PlayManuallyActivity extends AppCompatActivity {
         energy = 0;
         path = 0;
 
-        shortcut.setOnClickListener(new View.OnClickListener() {
+        wholeMazeMan.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+                    wholeMazeMan.setBackgroundColor(getResources().getColor(R.color.green));
+                    Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
+                    Log.v(getString(R.string.wholeMaze), Boolean.toString(isChecked));
+                }
+                else {
+                    wholeMazeMan.setBackgroundColor(getResources().getColor(R.color.red));
+                    Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
+                    Log.v(getString(R.string.wholeMaze), Boolean.toString(isChecked));
+                }
+            }
+        });
+
+        solutionMan.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+                    solutionMan.setBackgroundColor(getResources().getColor(R.color.green));
+                    Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
+                    Log.v(getString(R.string.solution), Boolean.toString(isChecked));
+                }
+                else {
+                    solutionMan.setBackgroundColor(getResources().getColor(R.color.red));
+                    Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
+                    Log.v(getString(R.string.solution), Boolean.toString(isChecked));
+                }
+            }
+        });
+
+        visibleWallsMan.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+                    visibleWallsMan.setBackgroundColor(getResources().getColor(R.color.green));
+                    Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
+                    Log.v(getString(R.string.visible), Boolean.toString(isChecked));
+                }
+                else {
+                    visibleWallsMan.setBackgroundColor(getResources().getColor(R.color.red));
+                    Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
+                    Log.v(getString(R.string.visible), Boolean.toString(isChecked));
+                }
+            }
+        });
+
+        shortcutMan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), FinishActivity.class);
@@ -53,6 +103,46 @@ public class PlayManuallyActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
                 Log.v(getString(R.string.shortcut), getString(R.string.inputDetected));
                 startActivity(i);
+            }
+        });
+
+        up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
+                Log.v(getString(R.string.up), getString(R.string.inputDetected));
+            }
+        });
+
+        left.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
+                Log.v(getString(R.string.left), getString(R.string.inputDetected));
+            }
+        });
+
+        jump.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
+                Log.v(getString(R.string.jump), getString(R.string.inputDetected));
+            }
+        });
+
+        right.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
+                Log.v(getString(R.string.right), getString(R.string.inputDetected));
+            }
+        });
+
+        down.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
+                Log.v(getString(R.string.down), getString(R.string.inputDetected));
             }
         });
     }

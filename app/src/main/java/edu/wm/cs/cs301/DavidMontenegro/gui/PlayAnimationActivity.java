@@ -7,17 +7,19 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import edu.wm.cs.cs301.DavidMontenegro.R;
 
 public class PlayAnimationActivity extends AppCompatActivity {
 
-    private Button wholeMaze;
-    private Button solution;
-    private Button visibleWalls;
-    private Button shortcut;
+    private ToggleButton wholeMazeAni;
+    private ToggleButton solutionAni;
+    private ToggleButton visibleWallsAni;
+    private Button shortcutAni;
     private Button start;
     private int energy;
     private int path;
@@ -27,15 +29,63 @@ public class PlayAnimationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_animation);
 
-        wholeMaze = (Button) findViewById(R.id.wholeMaze);
-        solution = (Button) findViewById(R.id.solution);
-        visibleWalls = (Button) findViewById(R.id.visibleWalls);
-        shortcut = (Button) findViewById(R.id.shortcut);
+        wholeMazeAni = (ToggleButton) findViewById(R.id.wholeMazeAni);
+        solutionAni = (ToggleButton) findViewById(R.id.solutionAni);
+        visibleWallsAni = (ToggleButton) findViewById(R.id.visibleWallsAni);
+        shortcutAni= (Button) findViewById(R.id.shortcutAni);
         start = (Button) findViewById(R.id.start);
         energy = 0;
         path = 0;
 
-        shortcut.setOnClickListener(new View.OnClickListener() {
+        wholeMazeAni.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+                    wholeMazeAni.setBackgroundColor(getResources().getColor(R.color.green));
+                    Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
+                    Log.v(getString(R.string.wholeMaze), Boolean.toString(isChecked));
+                }
+                else {
+                    wholeMazeAni.setBackgroundColor(getResources().getColor(R.color.red));
+                    Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
+                    Log.v(getString(R.string.wholeMaze), Boolean.toString(isChecked));
+                }
+            }
+        });
+
+        solutionAni.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+                    solutionAni.setBackgroundColor(getResources().getColor(R.color.green));
+                    Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
+                    Log.v(getString(R.string.solution), Boolean.toString(isChecked));
+                }
+                else {
+                    solutionAni.setBackgroundColor(getResources().getColor(R.color.red));
+                    Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
+                    Log.v(getString(R.string.solution), Boolean.toString(isChecked));
+                }
+            }
+        });
+
+        visibleWallsAni.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+                    visibleWallsAni.setBackgroundColor(getResources().getColor(R.color.green));
+                    Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
+                    Log.v(getString(R.string.visible), Boolean.toString(isChecked));
+                }
+                else {
+                    visibleWallsAni.setBackgroundColor(getResources().getColor(R.color.red));
+                    Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
+                    Log.v(getString(R.string.visible), Boolean.toString(isChecked));
+                }
+            }
+        });
+
+        shortcutAni.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), FinishActivity.class);
@@ -44,6 +94,14 @@ public class PlayAnimationActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
                 Log.v(getString(R.string.shortcut), getString(R.string.inputDetected));
                 startActivity(i);
+            }
+        });
+
+        start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
+                Log.v(getString(R.string.start), getString(R.string.inputDetected));
             }
         });
     }

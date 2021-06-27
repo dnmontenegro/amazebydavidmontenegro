@@ -15,39 +15,45 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">
 
-        <Button
-            android:id="@+id/wholeMaze"
+        <ToggleButton
+            android:id="@+id/wholeMazeAni"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
+            android:checked="false"
             android:background="@color/red"
-            android:text="@string/wholeMaze"
+            android:textOff="@string/wholeMaze"
+            android:textOn="@string/wholeMaze"
             android:textColor="@color/white"
             android:textSize="15sp" />
 
-        <Button
-            android:id="@+id/solution"
+        <ToggleButton
+            android:id="@+id/solutionAni"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
+            android:checked="false"
             android:background="@color/red"
-            android:text="@string/solution"
+            android:textOff="@string/solution"
+            android:textOn="@string/solution"
             android:textColor="@color/white"
             android:textSize="15sp" />
 
-        <Button
-            android:id="@+id/visibleWalls"
+        <ToggleButton
+            android:id="@+id/visibleWallsAni"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
+            android:checked="false"
             android:background="@color/red"
-            android:text="@string/visible"
+            android:textOff="@string/visible"
+            android:textOn="@string/visible"
             android:textColor="@color/white"
             android:textSize="15dp" />
 
     </LinearLayout>
 
     <Button
-        android:id="@+id/shortcut"
+        android:id="@+id/shortcutAni"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="230dp"
@@ -70,7 +76,7 @@
         android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/shortcut" />
+        app:layout_constraintTop_toBottomOf="@id/shortcutAni" />
 
     <ProgressBar
         android:id="@+id/energyProgress"

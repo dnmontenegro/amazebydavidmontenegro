@@ -9,6 +9,7 @@
     <color name="brightYellow">#ffe62d</color>
     <color name="darkYellow">#9E8F0E</color>
     <color name="red">#e92929</color>
+    <color name="green">#4CAF50</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 </resources>
