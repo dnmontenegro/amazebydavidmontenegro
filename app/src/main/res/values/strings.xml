@@ -7,4 +7,6 @@
     <string name="tAlgorithm">Choose a maze generation algorithm:</string>
     <string name="tMode">Choose a playing mode:</string>
     <string name="inputDetected">Input detected!</string>
+    <string name="roomsYes">YES</string>
+    <string name="roomsNo">NO</string>
 </resources>

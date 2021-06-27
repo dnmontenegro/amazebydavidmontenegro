@@ -4,11 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import edu.wm.cs.cs301.DavidMontenegro.R;
 
@@ -20,7 +23,8 @@ public class AMazeActivity extends AppCompatActivity {
     private TextView tProgress;
     private int mazeSize;
     private TextView tRooms;
-    private Button rooms;
+    private ToggleButton rooms;
+    private boolean mazeRooms;
     private TextView tAlgorithm;
     private Spinner algorithm;
     private TextView tMode;
@@ -37,7 +41,10 @@ public class AMazeActivity extends AppCompatActivity {
         tSize = (TextView) findViewById(R.id.tSize);
         size = (SeekBar) findViewById(R.id.size);
         tProgress = (TextView) findViewById(R.id.tProgress);
+        mazeSize = 0;
         tRooms = (TextView) findViewById(R.id.tRooms);
+        rooms = (ToggleButton) findViewById(R.id.rooms);
+        mazeRooms = true;
         tAlgorithm = (TextView) findViewById(R.id.tAlgorithm);
         tMode = (TextView) findViewById(R.id.tMode);
 
@@ -58,6 +65,22 @@ public class AMazeActivity extends AppCompatActivity {
             public void onStopTrackingTouch(SeekBar seekBar) {
                 Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
                 Log.v((String) getApplicationContext().getText(R.string.tSize), (String) getApplicationContext().getText(R.string.inputDetected));
+            }
+        });
+
+        rooms.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+                    mazeRooms = true;
+                    Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
+                    Log.v((String) getApplicationContext().getText(R.string.tRooms), (String) getApplicationContext().getText(R.string.inputDetected));
+                }
+                else {
+                    mazeRooms = false;
+                    Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
+                    Log.v((String) getApplicationContext().getText(R.string.tRooms), (String) getApplicationContext().getText(R.string.inputDetected));
+                }
             }
         });
 

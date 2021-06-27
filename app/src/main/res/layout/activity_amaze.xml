@@ -63,6 +63,19 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tProgress" />
 
+    <ToggleButton
+        android:id="@+id/rooms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:textOn="@string/roomsYes"
+        android:textOff="@string/roomsNo"
+        android:textColor="@color/white"
+        android:background="@color/red"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tRooms" />
+
     <TextView
         android:id="@+id/tAlgorithm"
         android:layout_width="wrap_content"
@@ -73,7 +86,7 @@
         android:text="@string/tAlgorithm"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tRooms" />
+        app:layout_constraintTop_toBottomOf="@id/rooms" />
 
     <TextView
         android:id="@+id/tMode"
