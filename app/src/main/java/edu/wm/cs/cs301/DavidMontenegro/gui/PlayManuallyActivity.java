@@ -24,7 +24,6 @@ public class PlayManuallyActivity extends AppCompatActivity {
     private Button jump;
     private Button right;
     private Button down;
-    private Button manBack;
     private int energy;
     private int path;
 
@@ -42,7 +41,6 @@ public class PlayManuallyActivity extends AppCompatActivity {
         jump = (Button) findViewById(R.id.jump);
         right = (Button) findViewById(R.id.right);
         down = (Button) findViewById(R.id.down);
-        manBack = (Button) findViewById(R.id.manBack);
         energy = 0;
         path = 0;
 
@@ -57,17 +55,12 @@ public class PlayManuallyActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
-        manBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), AMazeActivity.class);
-                Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
-                Log.v(getString(R.string.manBack), getString(R.string.inputDetected));
-                startActivity(i);
-            }
-        });
-
-
+    }
+    @Override
+    public void onBackPressed(){
+        Intent i = new Intent(getApplicationContext(), AMazeActivity.class);
+        Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
+        Log.v(getString(R.string.back), getString(R.string.inputDetected));
+        startActivity(i);
     }
 }

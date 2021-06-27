@@ -18,20 +18,21 @@
     <string name="revisit">Revisit</string>
     <string name="explore">Explore</string>
     <string name="genProgress">Maze generation progress:</string>
-    <string name="genBack">Back</string>
     <string name="percent">%1$d%%</string>
     <string name="wholeMaze">Whole Maze From Top</string>
     <string name="solution">Solution in the Maze</string>
     <string name="visible">Currently Visible Walls</string>
-    <string name="mazeManual">Maze:</string>
-    <string name="mazeAnimation">Maze:</string>
+    <string name="mazeManual">Manual</string>
+    <string name="mazeAnimation">Animation</string>
     <string name="shortcut">Shortcut</string>
     <string name="up">Up</string>
     <string name="jump">Jump</string>
     <string name="left">Left</string>
     <string name="right">Right</string>
     <string name="down">Down</string>
-    <string name="manBack">Back</string>
+    <string name="back">Back</string>
+    <string name="energy">Remaining energy:</string>
+    <string name="start">Start</string>
 
 
 </resources>

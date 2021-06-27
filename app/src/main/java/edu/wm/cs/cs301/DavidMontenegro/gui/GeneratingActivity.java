@@ -19,7 +19,6 @@ public class GeneratingActivity extends AppCompatActivity {
     private TextView genProgress;
     private ProgressBar mazeProgress;
     private TextView percentProgress;
-    private Button genBack;
     private int mazeSize;
     private boolean mazeRooms;
     private String mazeAlgorithm;
@@ -33,7 +32,6 @@ public class GeneratingActivity extends AppCompatActivity {
         genProgress = (TextView) findViewById(R.id.genProgress);
         mazeProgress = (ProgressBar) findViewById(R.id.mazeProgress);
         percentProgress = (TextView) findViewById(R.id.percentProgress);
-        genBack = (Button) findViewById(R.id.genBack);
         mazeSize = getIntent().getIntExtra("MazeSize", 0);
         mazeRooms = getIntent().getBooleanExtra("MazeRooms", true);
         mazeAlgorithm = getIntent().getStringExtra("MazeAlgorithm");
@@ -65,18 +63,12 @@ public class GeneratingActivity extends AppCompatActivity {
                 startActivity(i);
             }
         }).start();
-
-        genBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), AMazeActivity.class);
-                Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
-                Log.v(getString(R.string.genBack), getString(R.string.inputDetected));
-                startActivity(i);
-            }
-        });
-
-
-
+    }
+    @Override
+    public void onBackPressed(){
+        Intent i = new Intent(getApplicationContext(), AMazeActivity.class);
+        Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
+        Log.v(getString(R.string.back), getString(R.string.inputDetected));
+        startActivity(i);
     }
 }
