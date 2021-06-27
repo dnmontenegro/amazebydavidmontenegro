@@ -58,7 +58,7 @@ public class GeneratingActivity extends AppCompatActivity {
                     });
                 }
                 Intent i;
-                if (mazeAlgorithm.equals("Manual"))
+                if (mazeMode.equals(getString(R.string.Manual)))
                     i = new Intent(getApplicationContext(), PlayManuallyActivity.class);
                 else
                     i = new Intent(getApplicationContext(), PlayAnimationActivity.class);
