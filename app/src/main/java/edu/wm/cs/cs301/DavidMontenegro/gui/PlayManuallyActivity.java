@@ -28,6 +28,11 @@ public class PlayManuallyActivity extends AppCompatActivity {
     private Button down;
     private boolean winOrLose;
 
+    /**
+     * This method runs upon the creation of the activity. The method's intended purpose
+     * is to display the maze and allow the user to manually navigate the maze.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +50,13 @@ public class PlayManuallyActivity extends AppCompatActivity {
         winOrLose = true;
 
         wholeMazeMan.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            /**
+             * This method checks if the button has been toggled. It updates the color of the
+             * button to show the user whether the button is toggled on or not. The method's
+             * intended purpose is to show the whole maze from the top or not.
+             * @param buttonView
+             * @param isChecked
+             */
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
@@ -61,6 +73,13 @@ public class PlayManuallyActivity extends AppCompatActivity {
         });
 
         solutionMan.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            /**
+             * This method checks if the button has been toggled. It updates the color of the
+             * button to show the user whether the button is toggled on or not. The method's
+             * intended purpose is to show the solution in the maze or not.
+             * @param buttonView
+             * @param isChecked
+             */
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
@@ -77,6 +96,13 @@ public class PlayManuallyActivity extends AppCompatActivity {
         });
 
         visibleWallsMan.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            /**
+             * This method checks if the button has been toggled. It updates the color of the
+             * button to show the user whether the button is toggled on or not. The method's
+             * intended purpose is to show the currently visible walls or not.
+             * @param buttonView
+             * @param isChecked
+             */
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
@@ -93,6 +119,11 @@ public class PlayManuallyActivity extends AppCompatActivity {
         });
 
         shortcutMan.setOnClickListener(new View.OnClickListener() {
+            /**
+             * This method advances the user to the finish activity. It is a placeholder for
+             * the maze.
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), FinishActivity.class);
@@ -104,6 +135,10 @@ public class PlayManuallyActivity extends AppCompatActivity {
         });
 
         up.setOnClickListener(new View.OnClickListener() {
+            /**
+             * This method's intended purpose is to allow the user to nagivate up.
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
@@ -112,6 +147,10 @@ public class PlayManuallyActivity extends AppCompatActivity {
         });
 
         left.setOnClickListener(new View.OnClickListener() {
+            /**
+             * This method's intended purpose is to allow the user to nagivate left.
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
@@ -120,6 +159,10 @@ public class PlayManuallyActivity extends AppCompatActivity {
         });
 
         jump.setOnClickListener(new View.OnClickListener() {
+            /**
+             * This method's intended purpose is to allow the user to jump.
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
@@ -128,6 +171,10 @@ public class PlayManuallyActivity extends AppCompatActivity {
         });
 
         right.setOnClickListener(new View.OnClickListener() {
+            /**
+             * This method's intended purpose is to allow the user to nagivate right.
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
@@ -136,6 +183,10 @@ public class PlayManuallyActivity extends AppCompatActivity {
         });
 
         down.setOnClickListener(new View.OnClickListener() {
+            /**
+             * This method's intended purpose is to allow the user to nagivate down.
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
@@ -143,6 +194,9 @@ public class PlayManuallyActivity extends AppCompatActivity {
             }
         });
     }
+    /**
+     * This method returns the user to the welcome page when the back button is pressed.
+     */
     @Override
     public void onBackPressed(){
         Intent i = new Intent(getApplicationContext(), AMazeActivity.class);

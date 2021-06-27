@@ -25,6 +25,12 @@ public class GeneratingActivity extends AppCompatActivity {
     private String mazeMode;
     private Thread generation;
 
+    /**
+     * This method runs upon the creation of the activity. The method's intended purpose
+     * is to show an intermediate page where the user is shown the progress of the maze
+     * generation.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +45,10 @@ public class GeneratingActivity extends AppCompatActivity {
         mazeMode = getIntent().getStringExtra("MazeMode");
 
         generation = new Thread(new Runnable() {
+            /**
+             * This method's intended purpose is to mimic maze generation by incrementally
+             * increasing the progress of the progressbar.
+             */
             @Override
             public void run() {
                 while(mazeProgress.getProgress() < 100) {
@@ -50,6 +60,10 @@ public class GeneratingActivity extends AppCompatActivity {
                     }
                     mazeProgress.incrementProgressBy(5);
                     runOnUiThread(new Runnable() {
+                        /**
+                         * This method updates the text under the progressbar to show the user
+                         * the current progress.
+                         */
                         @Override
                         public void run() {
                             percentProgress.setText(getString(R.string.percent, mazeProgress.getProgress()));
@@ -72,6 +86,10 @@ public class GeneratingActivity extends AppCompatActivity {
         });
         generation.start();
     }
+
+    /**
+     * This method returns the user to the welcome page when the back button is pressed.
+     */
     @Override
     public void onBackPressed(){
         generation.interrupt();

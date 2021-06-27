@@ -37,6 +37,12 @@ public class AMazeActivity extends AppCompatActivity {
     private Button revisit;
     private Button explore;
 
+    /**
+     * This method runs upon the creation of the activity. The method's intended purpose
+     * is to show the welcome page where the user can select parameter settings for the maze
+     * generation. The user can choose to explore a new maze or revisit an old one.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +66,13 @@ public class AMazeActivity extends AppCompatActivity {
         explore = (Button) findViewById(R.id.explore);
 
         size.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            /**
+             * This method updates the setting displayed on the screen by the user moving
+             * the seekbar. It also updates the stored parameter for the maze size.
+             * @param seekBar
+             * @param progress
+             * @param fromUser
+             */
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 seekBar.setMax(15);
@@ -67,11 +80,19 @@ public class AMazeActivity extends AppCompatActivity {
                 mazeSize = progress;
             }
 
+            /**
+             * This method runs upon the start of the seekbar being moved.
+             * @param seekBar
+             */
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
 
             }
 
+            /**
+             * This method runs upon the end of the seekbar being moved.
+             * @param seekBar
+             */
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
@@ -80,6 +101,12 @@ public class AMazeActivity extends AppCompatActivity {
         });
 
         rooms.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            /**
+             * This method checks if the button to determine the rooms parameter has been
+             * toggled. It also updates the stored parameter for rooms in the maze.
+             * @param buttonView
+             * @param isChecked
+             */
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
@@ -100,6 +127,14 @@ public class AMazeActivity extends AppCompatActivity {
         algor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         algorithm.setAdapter(algor);
         algorithm.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            /**
+             * This method checks if an item has been selected in the spinner. It also updates
+             * the stored parameter for the maze algorithm.
+             * @param parent
+             * @param view
+             * @param position
+             * @param id
+             */
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 mazeAlgorithm = algorithm.getSelectedItem().toString();
@@ -107,6 +142,10 @@ public class AMazeActivity extends AppCompatActivity {
                 Log.v(getString(R.string.tAlgorithm), mazeAlgorithm);
             }
 
+            /**
+             * This method runs upon no item being selected in the spinner.
+             * @param parent
+             */
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
@@ -118,13 +157,24 @@ public class AMazeActivity extends AppCompatActivity {
         mod.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mode.setAdapter(mod);
         mode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            /**
+             * This method checks if an item has been selected in the spinner. It also updates
+             * the stored parameter for the maze mode.
+             * @param parent
+             * @param view
+             * @param position
+             * @param id
+             */
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 mazeMode = mode.getSelectedItem().toString();
                 Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
                 Log.v(getString(R.string.tMode), mazeMode);
             }
-
+            /**
+             * This method runs upon no item being selected in the spinner.
+             * @param parent
+             */
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
@@ -132,6 +182,11 @@ public class AMazeActivity extends AppCompatActivity {
         });
 
         revisit.setOnClickListener(new View.OnClickListener() {
+            /**
+             * This method checks if the button has been clicked. The method's intended purpose
+             * is to send the user to a previously visited maze.
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), GeneratingActivity.class);
@@ -146,6 +201,11 @@ public class AMazeActivity extends AppCompatActivity {
         });
 
         explore.setOnClickListener(new View.OnClickListener() {
+            /**
+             * This method checks if the button has been clicked. The method's intended purpose
+             * is to send the user to a new maze with the stored parameters.
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), GeneratingActivity.class);

@@ -21,6 +21,12 @@ public class FinishActivity extends AppCompatActivity {
     private TextView finEnergy;
     private TextView finWinOrLose;
 
+    /**
+     * This method runs upon the creation of the activity. The method's intended purpose
+     * is to display the finish page and inform the user what happened and how to restart
+     * the game.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +48,9 @@ public class FinishActivity extends AppCompatActivity {
             finWinOrLose.setText(getString(R.string.failure));
 
     }
-
+    /**
+     * This method returns the user to the welcome page when the back button is pressed.
+     */
     @Override
     public void onBackPressed(){
         Intent i = new Intent(getApplicationContext(), AMazeActivity.class);

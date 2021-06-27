@@ -28,6 +28,11 @@ public class PlayAnimationActivity extends AppCompatActivity {
     private int energy;
     private boolean winOrLose;
 
+    /**
+     * This method runs upon the creation of the activity. The method's intended purpose
+     * is to display the maze and allow the user to watch a robot exploring the maze.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,10 +47,17 @@ public class PlayAnimationActivity extends AppCompatActivity {
         start = (Button) findViewById(R.id.start);
         path = 0;
         energy = 0;
-        winOrLose = true;
+        winOrLose = false;
         energyProgress.setProgress(100);
 
         wholeMazeAni.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            /**
+             * This method checks if the button has been toggled. It updates the color of the
+             * button to show the user whether the button is toggled on or not. The method's
+             * intended purpose is to show the whole maze from the top or not.
+             * @param buttonView
+             * @param isChecked
+             */
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
@@ -62,6 +74,13 @@ public class PlayAnimationActivity extends AppCompatActivity {
         });
 
         solutionAni.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            /**
+             * This method checks if the button has been toggled. It updates the color of the
+             * button to show the user whether the button is toggled on or not. The method's
+             * intended purpose is to show the solution in the maze or not.
+             * @param buttonView
+             * @param isChecked
+             */
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
@@ -78,6 +97,13 @@ public class PlayAnimationActivity extends AppCompatActivity {
         });
 
         visibleWallsAni.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            /**
+             * This method checks if the button has been toggled. It updates the color of the
+             * button to show the user whether the button is toggled on or not. The method's
+             * intended purpose is to show the currently visible walls or not.
+             * @param buttonView
+             * @param isChecked
+             */
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
@@ -94,6 +120,11 @@ public class PlayAnimationActivity extends AppCompatActivity {
         });
 
         shortcutAni.setOnClickListener(new View.OnClickListener() {
+            /**
+             * This method advances the user to the finish activity. It is a placeholder for
+             * the maze.
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), FinishActivity.class);
@@ -107,6 +138,11 @@ public class PlayAnimationActivity extends AppCompatActivity {
         });
 
         start.setOnClickListener(new View.OnClickListener() {
+            /**
+             * This method's intended purpose is to allow the user to start the exploration of the
+             * maze by the robot and to pause te animation.
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
@@ -114,7 +150,9 @@ public class PlayAnimationActivity extends AppCompatActivity {
             }
         });
     }
-
+    /**
+     * This method returns the user to the welcome page when the back button is pressed.
+     */
     @Override
     public void onBackPressed(){
         Intent i = new Intent(getApplicationContext(), AMazeActivity.class);
