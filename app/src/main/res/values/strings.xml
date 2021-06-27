@@ -9,4 +9,14 @@
     <string name="inputDetected">Input detected!</string>
     <string name="roomsYes">YES</string>
     <string name="roomsNo">NO</string>
+    <string name="DFS">DFS</string>
+    <string name="Prim">Prim</string>
+    <string name="Kruskal">Kruskal</string>
+    <string name="Manual">Manual</string>
+    <string name="WallFollower">Wall Follower</string>
+    <string name="Wizard">Kruskal</string>
+    <string name="revisit">Revisit</string>
+    <string name="explore">Explore</string>
+
+
 </resources>

@@ -10,11 +10,10 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:padding="24dp"
+        android:padding="18dp"
+        android:text="@string/title"
         android:textColor="@color/red"
         android:textSize="20sp"
-        android:text="@string/title"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,11 +22,10 @@
         android:id="@+id/tSize"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:padding="24dp"
+        android:padding="18dp"
+        android:text="@string/tSize"
         android:textColor="@color/red"
         android:textSize="20sp"
-        android:text="@string/tSize"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title" />
@@ -44,7 +42,7 @@
         android:id="@+id/tProgress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="24dp"
+        android:padding="16dp"
         android:textColor="@color/darkYellow"
         android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -55,7 +53,7 @@
         android:id="@+id/tRooms"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="24dp"
+        android:padding="18dp"
         android:textColor="@color/red"
         android:textSize="20sp"
         android:text="@string/tRooms"
@@ -80,7 +78,7 @@
         android:id="@+id/tAlgorithm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="24dp"
+        android:padding="18dp"
         android:textColor="@color/red"
         android:textSize="20sp"
         android:text="@string/tAlgorithm"
@@ -88,17 +86,62 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rooms" />
 
+    <Spinner
+        android:id="@+id/algorithm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tAlgorithm" />
+
     <TextView
         android:id="@+id/tMode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="24dp"
+        android:padding="18dp"
         android:textColor="@color/red"
         android:textSize="20sp"
         android:text="@string/tMode"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tAlgorithm" />
+        app:layout_constraintTop_toBottomOf="@id/algorithm" />
+
+    <Spinner
+        android:id="@+id/mode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tMode" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mode" >
+
+        <Button
+            android:id="@+id/revisit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:text="@string/revisit"
+            android:textColor="@color/white"
+            android:background="@color/red" />
+
+        <Button
+            android:id="@+id/explore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="@string/explore"
+            android:textColor="@color/white"
+            android:background="@color/red" />
+
+    </LinearLayout>
 
 
 
