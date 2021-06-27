@@ -2,7 +2,9 @@
     <string name="app_name">AMazeByDavidMontenegro</string>
     <string name="title">Welcome to the maze!</string>
     <string name="tSize">Choose a maze size:</string>
+    <string name="size">Size: %1$d</string>
     <string name="tRooms">Choose to have rooms or not:</string>
     <string name="tAlgorithm">Choose a maze generation algorithm:</string>
     <string name="tMode">Choose a playing mode:</string>
+    <string name="inputDetected">Input detected!</string>
 </resources>

@@ -10,10 +10,11 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:layout_marginTop="4dp"
         android:padding="24dp"
         android:textColor="@color/red"
-        app:layout_constraintBottom_toBottomOf="@id/tSize"
+        android:textSize="20sp"
+        android:text="@string/title"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,49 +23,69 @@
         android:id="@+id/tSize"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:layout_marginTop="4dp"
         android:padding="24dp"
         android:textColor="@color/red"
-        app:layout_constraintBottom_toBottomOf="@id/tRooms"
+        android:textSize="20sp"
+        android:text="@string/tSize"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/title" />
+        app:layout_constraintTop_toBottomOf="@id/title" />
+
+    <SeekBar
+        android:id="@+id/size"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tSize" />
+
+    <TextView
+        android:id="@+id/tProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="24dp"
+        android:textColor="@color/darkYellow"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/size" />
 
     <TextView
         android:id="@+id/tRooms"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
         android:padding="24dp"
         android:textColor="@color/red"
-        app:layout_constraintBottom_toBottomOf="@id/tAlgorithm"
+        android:textSize="20sp"
+        android:text="@string/tRooms"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tSize" />
+        app:layout_constraintTop_toBottomOf="@id/tProgress" />
 
     <TextView
         android:id="@+id/tAlgorithm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
         android:padding="24dp"
         android:textColor="@color/red"
-        app:layout_constraintBottom_toBottomOf="@id/tMode"
+        android:textSize="20sp"
+        android:text="@string/tAlgorithm"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tRooms" />
+        app:layout_constraintTop_toBottomOf="@id/tRooms" />
 
     <TextView
         android:id="@+id/tMode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
         android:padding="24dp"
         android:textColor="@color/red"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="20sp"
+        android:text="@string/tMode"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tAlgorithm" />
+        app:layout_constraintTop_toBottomOf="@id/tAlgorithm" />
 
 
 

@@ -7,6 +7,10 @@
         <item name="colorOnPrimary">@color/white</item>
         <item name="android:colorBackground">@color/white</item>
         <!-- Customize your theme here. -->
+        <item name="colorSecondary">@color/brightYellow</item>
+        <item name="colorSecondaryVariant">@color/darkYellow</item>
+        <item name="colorOnSecondary">@color/white</item>
+
     </style>
 
 
