@@ -198,7 +198,22 @@ public class PlayManuallyActivity extends AppCompatActivity {
         });
 
         mazePanel.setColor(Color.RED);
-        mazePanel.addArc(0, 0, 400, 400, 45, 15);
+        mazePanel.addFilledRectangle(0, 0, 200, 200);
+        mazePanel.setColor(Color.YELLOW);
+        mazePanel.addFilledRectangle(200, 200, 200, 200);
+        mazePanel.setColor(Color.BLUE);
+        mazePanel.addFilledRectangle(0, 200, 200, 200);
+        mazePanel.setColor(Color.GREEN);
+        mazePanel.addFilledRectangle(200, 0, 200, 200);
+        mazePanel.setColor(Color.WHITE);
+        mazePanel.addLine(0,0, 400, 400);
+        mazePanel.addLine(0,400, 400, 0);
+        mazePanel.setColor(Color.BLACK);
+        mazePanel.addFilledOval(0, 0, 200, 200);
+        mazePanel.setColor(Color.CYAN);
+        mazePanel.addFilledOval(200, 100, 200, 200);
+        mazePanel.setColor(Color.MAGENTA);
+        mazePanel.addArc(200, 100, 200, 200,0,45);
         mazePanel.commit();
 
     }

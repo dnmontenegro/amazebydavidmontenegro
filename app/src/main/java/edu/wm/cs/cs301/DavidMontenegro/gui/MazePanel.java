@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -52,17 +53,26 @@ public class MazePanel extends View implements P5Panel {
 
 	@Override
 	public void addFilledRectangle(int x, int y, int width, int height) {
-
+		paint.setStyle(Paint.Style.FILL);
+		canvas.drawRect(x, y, x+width, y+height, paint);
 	}
 
 	@Override
 	public void addFilledPolygon(int[] xPoints, int[] yPoints, int nPoints) {
+		paint.setStyle(Paint.Style.FILL);
 
 	}
 
 	@Override
 	public void addPolygon(int[] xPoints, int[] yPoints, int nPoints) {
-
+		Path path = new Path();
+		path.reset();
+		path.moveTo(xPoints[0], yPoints[0]);
+		for(int i = 1; i < nPoints; i ++) {
+			path.lineTo(xPoints[i], yPoints[i]);
+		}
+		path.close();
+		canvas.drawPath(path, paint);
 	}
 
 	@Override
@@ -72,7 +82,8 @@ public class MazePanel extends View implements P5Panel {
 
 	@Override
 	public void addFilledOval(int x, int y, int width, int height) {
-
+		paint.setStyle(Paint.Style.FILL);
+		canvas.drawOval(x, y, x+width, y+height, paint);
 	}
 
 	@Override
