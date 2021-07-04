@@ -2,7 +2,9 @@ package edu.wm.cs.cs301.DavidMontenegro.gui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -68,6 +70,9 @@ public class AMazeActivity extends AppCompatActivity {
         revisit = (Button) findViewById(R.id.revisit);
         explore = (Button) findViewById(R.id.explore);
         randomSeed = 0;
+
+        SharedPreferences sharedPref = getPreferences(0);
+        SharedPreferences.Editor editor = sharedPref.edit();
 
         size.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             /**
@@ -196,12 +201,15 @@ public class AMazeActivity extends AppCompatActivity {
              */
             @Override
             public void onClick(View v) {
+                String key = mazeSize + mazeAlgorithm + mazeRooms;
+                int seed = sharedPref.getInt(key, 0);
+                Log.v(getString(R.string.revisit), Integer.toString(seed));
                 Intent i = new Intent(getApplicationContext(), GeneratingActivity.class);
                 i.putExtra("MazeSize", mazeSize);
                 i.putExtra("MazeRooms", mazeRooms);
                 i.putExtra("MazeAlgorithm", mazeAlgorithm);
                 i.putExtra("MazeMode", mazeMode);
-                i.putExtra("Seed", randomSeed);
+                i.putExtra("Seed", seed);
                 Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
                 Log.v(getString(R.string.revisit), getString(R.string.inputDetected));
                 startActivity(i);
@@ -216,6 +224,10 @@ public class AMazeActivity extends AppCompatActivity {
              */
             @Override
             public void onClick(View v) {
+                String key = mazeSize + mazeAlgorithm + mazeRooms;
+                Log.v(getString(R.string.explore), key);
+                editor.putInt(key, randomSeed);
+                editor.apply();
                 Intent i = new Intent(getApplicationContext(), GeneratingActivity.class);
                 i.putExtra("MazeSize", mazeSize);
                 i.putExtra("MazeRooms", mazeRooms);
