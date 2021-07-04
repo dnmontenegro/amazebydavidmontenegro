@@ -213,7 +213,17 @@ public class PlayManuallyActivity extends AppCompatActivity {
         mazePanel.setColor(Color.CYAN);
         mazePanel.addFilledOval(200, 100, 200, 200);
         mazePanel.setColor(Color.MAGENTA);
-        mazePanel.addArc(200, 100, 200, 200,0,45);
+        mazePanel.addArc(200, 100, 200, 200,0,90);
+        int[] xPoints = {200, 300, 100};
+        int[] yPoints = {0, 200, 200};
+        mazePanel.setColor(Color.DKGRAY);
+        mazePanel.addPolygon(xPoints, yPoints, 3);
+        int[] xPoints2 = {200, 300, 100};
+        int[] yPoints2 = {400, 200, 200};
+        mazePanel.setColor(Color.LTGRAY);
+        mazePanel.addFilledPolygon(xPoints2, yPoints2, 3);
+        mazePanel.setColor(Color.BLUE);
+        mazePanel.addMarker(100, 100, "Hello World!");
         mazePanel.commit();
 
     }

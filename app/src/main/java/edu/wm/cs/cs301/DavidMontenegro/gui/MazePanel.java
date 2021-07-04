@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -48,7 +49,10 @@ public class MazePanel extends View implements P5Panel {
 
 	@Override
 	public void addBackground(float percentToExit) {
-
+		paint.setColor(Color.BLACK);
+		addFilledRectangle(0, 0, Constants.VIEW_WIDTH, Constants.VIEW_HEIGHT/2);
+		paint.setColor(Color.DKGRAY);
+		addFilledRectangle(0, Constants.VIEW_HEIGHT/2, Constants.VIEW_WIDTH, Constants.VIEW_HEIGHT/2);
 	}
 
 	@Override
@@ -60,18 +64,26 @@ public class MazePanel extends View implements P5Panel {
 	@Override
 	public void addFilledPolygon(int[] xPoints, int[] yPoints, int nPoints) {
 		paint.setStyle(Paint.Style.FILL);
-
+		Path path = new Path();
+		path.reset();
+		path.moveTo(xPoints[0], yPoints[0]);
+		for(int i = 1; i < nPoints; i++) {
+			path.lineTo(xPoints[i], yPoints[i]);
+		}
+		path.lineTo(xPoints[0], yPoints[0]);
+		canvas.drawPath(path, paint);
 	}
 
 	@Override
 	public void addPolygon(int[] xPoints, int[] yPoints, int nPoints) {
+		paint.setStyle(Paint.Style.STROKE);
 		Path path = new Path();
 		path.reset();
 		path.moveTo(xPoints[0], yPoints[0]);
-		for(int i = 1; i < nPoints; i ++) {
+		for(int i = 1; i < nPoints; i++) {
 			path.lineTo(xPoints[i], yPoints[i]);
 		}
-		path.close();
+		path.lineTo(xPoints[0], yPoints[0]);
 		canvas.drawPath(path, paint);
 	}
 
@@ -88,12 +100,14 @@ public class MazePanel extends View implements P5Panel {
 
 	@Override
 	public void addArc(int x, int y, int width, int height, int startAngle, int arcAngle) {
-		canvas.drawArc(x, y, x+width, y+height, startAngle, arcAngle, true, paint);
+		paint.setStyle(Paint.Style.STROKE);
+		canvas.drawArc(x, y, x+width, y+height, startAngle, arcAngle, false, paint);
 	}
 
 	@Override
 	public void addMarker(float x, float y, String str) {
-
+		paint.setTextSize(25);
+		canvas.drawText(str, x, y, paint);
 	}
 
 	@Override
@@ -103,6 +117,6 @@ public class MazePanel extends View implements P5Panel {
 
 	@Override
 	public void onDraw(Canvas c) {
-		c.drawBitmap(bitmap, 0, 0, paint);
+		c.drawBitmap(bitmap, null, new Rect(0,0,1130,1130), paint);
 	}
 }
