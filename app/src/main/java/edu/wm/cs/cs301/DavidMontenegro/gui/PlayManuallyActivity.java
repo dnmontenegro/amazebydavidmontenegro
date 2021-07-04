@@ -33,6 +33,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
     private boolean winOrLose;
     private String mazeMode;
     private Maze maze;
+    private StatePlaying statePlaying;
 
     /**
      * This method runs upon the creation of the activity. The method's intended purpose
@@ -58,6 +59,9 @@ public class PlayManuallyActivity extends AppCompatActivity {
         mazeMode = getIntent().getStringExtra("MazeMode");
         maze = GeneratingActivity.getMaze();
         assert maze != null : "maze must be present";
+        statePlaying = new StatePlaying();
+        statePlaying.setMazeConfiguration(maze);
+        statePlaying.start(mazePanel);
 
         wholeMazeMan.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             /**
@@ -128,6 +132,8 @@ public class PlayManuallyActivity extends AppCompatActivity {
             }
         });
 
+
+
         /*shortcutMan.setOnClickListener(new View.OnClickListener() {
             *//**
              * This method advances the user to the finish activity. It is a placeholder for
@@ -153,6 +159,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
                 Log.v(getString(R.string.up), getString(R.string.inputDetected));
+                statePlaying.keyDown(Constants.UserInput.UP, 0);
             }
         });
 
@@ -165,6 +172,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
                 Log.v(getString(R.string.left), getString(R.string.inputDetected));
+                statePlaying.keyDown(Constants.UserInput.LEFT, 0);
             }
         });
 
@@ -177,6 +185,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
                 Log.v(getString(R.string.jump), getString(R.string.inputDetected));
+                statePlaying.keyDown(Constants.UserInput.JUMP, 0);
             }
         });
 
@@ -189,6 +198,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
                 Log.v(getString(R.string.right), getString(R.string.inputDetected));
+                statePlaying.keyDown(Constants.UserInput.RIGHT, 0);
             }
         });
 
@@ -201,10 +211,11 @@ public class PlayManuallyActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
                 Log.v(getString(R.string.down), getString(R.string.inputDetected));
+                statePlaying.keyDown(Constants.UserInput.DOWN, 0);
             }
         });
 
-        mazePanel.setColor(Color.RED);
+        /*mazePanel.setColor(Color.RED);
         mazePanel.addFilledRectangle(0, 0, 200, 200);
         mazePanel.setColor(Color.YELLOW);
         mazePanel.addFilledRectangle(200, 200, 200, 200);
@@ -232,7 +243,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
         mazePanel.setColor(Color.BLUE);
         mazePanel.addMarker(100, 100, "Hello World!");
         mazePanel.addBackground(0.20F);
-        mazePanel.commit();
+        mazePanel.commit();*/
 
     }
     /**
