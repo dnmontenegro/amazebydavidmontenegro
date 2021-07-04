@@ -48,7 +48,7 @@
             android:textOff="@string/visible"
             android:textOn="@string/visible"
             android:textColor="@color/white"
-            android:textSize="15dp" />
+            android:textSize="15sp" />
 
     </LinearLayout>
 

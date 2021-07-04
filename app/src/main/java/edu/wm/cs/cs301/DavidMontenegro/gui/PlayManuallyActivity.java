@@ -3,6 +3,7 @@ package edu.wm.cs.cs301.DavidMontenegro.gui;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,7 +21,8 @@ public class PlayManuallyActivity extends AppCompatActivity {
     private ToggleButton wholeMazeMan;
     private ToggleButton  solutionMan;
     private ToggleButton  visibleWallsMan;
-    private Button shortcutMan;
+    // private Button shortcutMan;
+    private MazePanel mazePanel;
     private Button up;
     private Button left;
     private Button jump;
@@ -41,7 +43,8 @@ public class PlayManuallyActivity extends AppCompatActivity {
         wholeMazeMan = (ToggleButton) findViewById(R.id.wholeMazeMan);
         solutionMan = (ToggleButton) findViewById(R.id.solutionMan);
         visibleWallsMan = (ToggleButton) findViewById(R.id.visibleWallsMan);
-        shortcutMan = (Button) findViewById(R.id.shortcutMan);
+        // shortcutMan = (Button) findViewById(R.id.shortcutMan);
+        mazePanel = (MazePanel) findViewById(R.id.mazePanel);
         up = (Button) findViewById(R.id.up);
         left = (Button) findViewById(R.id.left);
         jump = (Button) findViewById(R.id.jump);
@@ -118,12 +121,12 @@ public class PlayManuallyActivity extends AppCompatActivity {
             }
         });
 
-        shortcutMan.setOnClickListener(new View.OnClickListener() {
-            /**
+        /*shortcutMan.setOnClickListener(new View.OnClickListener() {
+            *//**
              * This method advances the user to the finish activity. It is a placeholder for
              * the maze.
              * @param v
-             */
+             *//*
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), FinishActivity.class);
@@ -132,7 +135,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
                 Log.v(getString(R.string.shortcut), getString(R.string.inputDetected));
                 startActivity(i);
             }
-        });
+        });*/
 
         up.setOnClickListener(new View.OnClickListener() {
             /**
@@ -193,6 +196,11 @@ public class PlayManuallyActivity extends AppCompatActivity {
                 Log.v(getString(R.string.down), getString(R.string.inputDetected));
             }
         });
+
+        mazePanel.setColor(Color.RED);
+        mazePanel.addArc(0, 0, 400, 400, 45, 15);
+        mazePanel.commit();
+
     }
     /**
      * This method returns the user to the welcome page when the back button is pressed.
