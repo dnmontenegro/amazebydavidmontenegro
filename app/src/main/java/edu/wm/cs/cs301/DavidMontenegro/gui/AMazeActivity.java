@@ -16,6 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import java.util.Random;
+
 import edu.wm.cs.cs301.DavidMontenegro.R;
 
 public class AMazeActivity extends AppCompatActivity {
@@ -36,6 +38,7 @@ public class AMazeActivity extends AppCompatActivity {
     private String mazeMode;
     private Button revisit;
     private Button explore;
+    private int randomSeed;
 
     /**
      * This method runs upon the creation of the activity. The method's intended purpose
@@ -64,6 +67,7 @@ public class AMazeActivity extends AppCompatActivity {
         mazeMode = getString(R.string.Manual);
         revisit = (Button) findViewById(R.id.revisit);
         explore = (Button) findViewById(R.id.explore);
+        randomSeed = 0;
 
         size.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             /**
@@ -181,6 +185,9 @@ public class AMazeActivity extends AppCompatActivity {
             }
         });
 
+        Random generator = new Random();
+        randomSeed = generator.nextInt();
+
         revisit.setOnClickListener(new View.OnClickListener() {
             /**
              * This method checks if the button has been clicked. The method's intended purpose
@@ -194,6 +201,7 @@ public class AMazeActivity extends AppCompatActivity {
                 i.putExtra("MazeRooms", mazeRooms);
                 i.putExtra("MazeAlgorithm", mazeAlgorithm);
                 i.putExtra("MazeMode", mazeMode);
+                i.putExtra("Seed", randomSeed);
                 Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
                 Log.v(getString(R.string.revisit), getString(R.string.inputDetected));
                 startActivity(i);
@@ -213,6 +221,7 @@ public class AMazeActivity extends AppCompatActivity {
                 i.putExtra("MazeRooms", mazeRooms);
                 i.putExtra("MazeAlgorithm", mazeAlgorithm);
                 i.putExtra("MazeMode", mazeMode);
+                i.putExtra("Seed", randomSeed);
                 Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
                 Log.v(getString(R.string.explore), getString(R.string.inputDetected));
                 startActivity(i);

@@ -13,8 +13,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import edu.wm.cs.cs301.DavidMontenegro.R;
+import edu.wm.cs.cs301.DavidMontenegro.generation.Maze;
+import edu.wm.cs.cs301.DavidMontenegro.generation.MazeFactory;
+import edu.wm.cs.cs301.DavidMontenegro.generation.Order;
 
-public class GeneratingActivity extends AppCompatActivity {
+public class GeneratingActivity extends AppCompatActivity implements Order {
 
     private TextView genProgress;
     private ProgressBar mazeProgress;
@@ -23,7 +26,11 @@ public class GeneratingActivity extends AppCompatActivity {
     private boolean mazeRooms;
     private String mazeAlgorithm;
     private String mazeMode;
+    private int randomSeed;
     private Thread generation;
+    private Builder builder;
+    private int percentdone;
+    private MazeFactory mazeFactory;
 
     /**
      * This method runs upon the creation of the activity. The method's intended purpose
@@ -43,6 +50,24 @@ public class GeneratingActivity extends AppCompatActivity {
         mazeRooms = getIntent().getBooleanExtra("MazeRooms", true);
         mazeAlgorithm = getIntent().getStringExtra("MazeAlgorithm");
         mazeMode = getIntent().getStringExtra("MazeMode");
+        randomSeed = getIntent().getIntExtra("Seed", 0);
+        percentdone = 0;
+
+        switch (mazeAlgorithm) {
+            case "DFS":
+                builder = Builder.DFS;
+                break;
+            case "Prim":
+                builder = Builder.Prim;
+                break;
+            case "Kruskal":
+                builder = Builder.Kruskal;
+                break;
+        }
+
+        mazeFactory = new MazeFactory();
+
+        mazeFactory.order(this);
 
         generation = new Thread(new Runnable() {
             /**
@@ -97,5 +122,37 @@ public class GeneratingActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
         Log.v(getString(R.string.back), getString(R.string.inputDetected));
         startActivity(i);
+    }
+
+    @Override
+    public int getSkillLevel() {
+        return mazeSize;
+    }
+
+    @Override
+    public Builder getBuilder() {
+        return builder;
+    }
+
+    @Override
+    public boolean isPerfect() {
+        return mazeRooms;
+    }
+
+    @Override
+    public int getSeed() {
+        return randomSeed;
+    }
+
+    @Override
+    public void deliver(Maze mazeConfig) {
+
+    }
+
+    @Override
+    public void updateProgress(int percentage) {
+        if (this.percentdone < percentage && percentage <= 100) {
+            this.percentdone = percentage;
+        }
     }
 }
