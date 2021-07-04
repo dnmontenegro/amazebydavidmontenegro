@@ -39,6 +39,7 @@
     <string name="failure">FAILURE!</string>
     <string name="finPath">%1$d</string>
     <string name="finEnergy">%1$d</string>
+    <string name="maze">Maze delivered!</string>
 
 
 </resources>

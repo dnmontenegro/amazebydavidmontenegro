@@ -15,6 +15,8 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import edu.wm.cs.cs301.DavidMontenegro.R;
+import edu.wm.cs.cs301.DavidMontenegro.generation.Maze;
+import edu.wm.cs.cs301.DavidMontenegro.generation.MazeContainer;
 
 public class PlayManuallyActivity extends AppCompatActivity {
 
@@ -29,6 +31,8 @@ public class PlayManuallyActivity extends AppCompatActivity {
     private Button right;
     private Button down;
     private boolean winOrLose;
+    private String mazeMode;
+    private Maze maze;
 
     /**
      * This method runs upon the creation of the activity. The method's intended purpose
@@ -51,6 +55,9 @@ public class PlayManuallyActivity extends AppCompatActivity {
         right = (Button) findViewById(R.id.right);
         down = (Button) findViewById(R.id.down);
         winOrLose = true;
+        mazeMode = getIntent().getStringExtra("MazeMode");
+        maze = GeneratingActivity.getMaze();
+        assert maze != null : "maze must be present";
 
         wholeMazeMan.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             /**

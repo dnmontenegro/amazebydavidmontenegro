@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import edu.wm.cs.cs301.DavidMontenegro.R;
 import edu.wm.cs.cs301.DavidMontenegro.generation.Maze;
+import edu.wm.cs.cs301.DavidMontenegro.generation.MazeContainer;
 import edu.wm.cs.cs301.DavidMontenegro.generation.MazeFactory;
 import edu.wm.cs.cs301.DavidMontenegro.generation.Order;
 
@@ -31,6 +32,7 @@ public class GeneratingActivity extends AppCompatActivity implements Order {
     private Builder builder;
     private int percentdone;
     private MazeFactory mazeFactory;
+    private static Maze maze;
 
     /**
      * This method runs upon the creation of the activity. The method's intended purpose
@@ -76,14 +78,8 @@ public class GeneratingActivity extends AppCompatActivity implements Order {
              */
             @Override
             public void run() {
-                while(mazeProgress.getProgress() < 100) {
-                    try {
-                        Thread.sleep(500);
-                    }
-                    catch (InterruptedException e) {
-                        return;
-                    }
-                    mazeProgress.incrementProgressBy(5);
+                while(percentdone < 100) {
+                    mazeProgress.setProgress(percentdone);
                     runOnUiThread(new Runnable() {
                         /**
                          * This method updates the text under the progressbar to show the user
@@ -106,6 +102,7 @@ public class GeneratingActivity extends AppCompatActivity implements Order {
                     i = new Intent(getApplicationContext(), PlayManuallyActivity.class);
                 else
                     i = new Intent(getApplicationContext(), PlayAnimationActivity.class);
+                i.putExtra("MazeMode", mazeMode);
                 startActivity(i);
             }
         });
@@ -118,6 +115,7 @@ public class GeneratingActivity extends AppCompatActivity implements Order {
     @Override
     public void onBackPressed(){
         generation.interrupt();
+        mazeFactory.cancel();
         Intent i = new Intent(getApplicationContext(), AMazeActivity.class);
         Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
         Log.v(getString(R.string.back), getString(R.string.inputDetected));
@@ -146,6 +144,8 @@ public class GeneratingActivity extends AppCompatActivity implements Order {
 
     @Override
     public void deliver(Maze mazeConfig) {
+        setMaze(mazeConfig);
+        Log.v(getString(R.string.maze), getString(R.string.maze));
 
     }
 
@@ -154,5 +154,13 @@ public class GeneratingActivity extends AppCompatActivity implements Order {
         if (this.percentdone < percentage && percentage <= 100) {
             this.percentdone = percentage;
         }
+    }
+
+    public static Maze getMaze() {
+        return maze;
+    }
+
+    public static void setMaze(Maze mazeConfig) {
+        maze = mazeConfig;
     }
 }
