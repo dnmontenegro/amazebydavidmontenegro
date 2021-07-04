@@ -224,6 +224,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
         mazePanel.addFilledPolygon(xPoints2, yPoints2, 3);
         mazePanel.setColor(Color.BLUE);
         mazePanel.addMarker(100, 100, "Hello World!");
+        mazePanel.addBackground(0.94F);
         mazePanel.commit();
 
     }

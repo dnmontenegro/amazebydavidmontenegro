@@ -36,6 +36,7 @@ public class MazePanel extends View implements P5Panel {
 	@Override
 	public void setColor(int rgb) {
 		paint.setColor(rgb);
+
 	}
 
 	@Override
@@ -43,15 +44,32 @@ public class MazePanel extends View implements P5Panel {
 		return paint.getColor();
 	}
 
-	public static int getColorEncoding(int red, int green, int blue) {
-		return Color.argb(255, red, green, blue);
+	public static int getColorEncoding(int red, int green, int blue, int a) {
+		return Color.valueOf(red, green, blue, a).toArgb();
+	}
+	private Color getBackgroundColor(float percentToExit, boolean top) {
+		return top? blend(Color.valueOf(Color.BLACK), Color.valueOf(Color.parseColor("#916f41")), percentToExit) :
+				blend(Color.valueOf(Color.LTGRAY), Color.valueOf(Color.parseColor("#115740")), percentToExit);
+	}
+
+	private Color blend(Color fstColor, Color sndColor, double weightFstColor) {
+		if (weightFstColor < 0.1)
+			return sndColor;
+		if (weightFstColor > 0.95)
+			return fstColor;
+		double r = weightFstColor * fstColor.red() + (1-weightFstColor) * sndColor.red();
+		double g = weightFstColor * fstColor.green() + (1-weightFstColor) * sndColor.green();
+		double b = weightFstColor * fstColor.blue() + (1-weightFstColor) * sndColor.blue();
+		double a = Math.max(fstColor.alpha(), sndColor.alpha());
+
+		return Color.valueOf((float) r, (float) g, (float) b, (float) a);
 	}
 
 	@Override
 	public void addBackground(float percentToExit) {
-		paint.setColor(Color.BLACK);
+		setColor(getBackgroundColor(percentToExit, true).toArgb());
 		addFilledRectangle(0, 0, Constants.VIEW_WIDTH, Constants.VIEW_HEIGHT/2);
-		paint.setColor(Color.DKGRAY);
+		setColor(getBackgroundColor(percentToExit, false).toArgb());
 		addFilledRectangle(0, Constants.VIEW_HEIGHT/2, Constants.VIEW_WIDTH, Constants.VIEW_HEIGHT/2);
 	}
 
