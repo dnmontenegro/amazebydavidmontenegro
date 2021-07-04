@@ -159,8 +159,6 @@ public class StatePlaying extends DefaultState {
         case UP: // move forward
             walk(1);
             // check termination, did we leave the maze?
-            if (isOutside(px,py)) {
-            }
             break;
         case LEFT: // turn left
             rotate(1);
@@ -171,8 +169,6 @@ public class StatePlaying extends DefaultState {
         case DOWN: // move backward
             walk(-1);
             // check termination, did we leave the maze?
-            if (isOutside(px,py)) {
-            }
             break;
         case RETURNTOTITLE: // escape to title screen
             break;
@@ -226,7 +222,7 @@ public class StatePlaying extends DefaultState {
 					isInShowMazeMode(),isInShowSolutionMode()) ;
 		}
 		// update the screen with the buffer graphics
-        panel.commit(); ;
+        panel.commit();
     }
     /**
      * Calculates a distance to exit as a percentage. 

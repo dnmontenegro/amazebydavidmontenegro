@@ -1,6 +1,7 @@
 package edu.wm.cs.cs301.DavidMontenegro.gui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -74,14 +75,16 @@ public class PlayManuallyActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
-                    wholeMazeMan.setBackgroundColor(getResources().getColor(R.color.green));
+                    wholeMazeMan.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.green));
                     Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
                     Log.v(getString(R.string.wholeMaze), Boolean.toString(isChecked));
+                    statePlaying.keyDown(Constants.UserInput.TOGGLEFULLMAP, 0);
                 }
                 else {
-                    wholeMazeMan.setBackgroundColor(getResources().getColor(R.color.red));
+                    wholeMazeMan.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.red));
                     Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
                     Log.v(getString(R.string.wholeMaze), Boolean.toString(isChecked));
+                    statePlaying.keyDown(Constants.UserInput.TOGGLEFULLMAP, 0);
                 }
             }
         });
@@ -97,14 +100,16 @@ public class PlayManuallyActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
-                    solutionMan.setBackgroundColor(getResources().getColor(R.color.green));
+                    solutionMan.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.green));
                     Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
                     Log.v(getString(R.string.solution), Boolean.toString(isChecked));
+                    statePlaying.keyDown(Constants.UserInput.TOGGLESOLUTION, 0);
                 }
                 else {
-                    solutionMan.setBackgroundColor(getResources().getColor(R.color.red));
+                    solutionMan.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.red));
                     Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
                     Log.v(getString(R.string.solution), Boolean.toString(isChecked));
+                    statePlaying.keyDown(Constants.UserInput.TOGGLESOLUTION, 0);
                 }
             }
         });
@@ -120,14 +125,16 @@ public class PlayManuallyActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
-                    visibleWallsMan.setBackgroundColor(getResources().getColor(R.color.green));
+                    visibleWallsMan.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.green));
                     Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
                     Log.v(getString(R.string.visible), Boolean.toString(isChecked));
+                    statePlaying.keyDown(Constants.UserInput.TOGGLELOCALMAP, 0);
                 }
                 else {
-                    visibleWallsMan.setBackgroundColor(getResources().getColor(R.color.red));
+                    visibleWallsMan.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.red));
                     Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
                     Log.v(getString(R.string.visible), Boolean.toString(isChecked));
+                    statePlaying.keyDown(Constants.UserInput.TOGGLELOCALMAP, 0);
                 }
             }
         });
@@ -160,6 +167,14 @@ public class PlayManuallyActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
                 Log.v(getString(R.string.up), getString(R.string.inputDetected));
                 statePlaying.keyDown(Constants.UserInput.UP, 0);
+                if(!maze.isValidPosition(statePlaying.px,statePlaying.py)) {
+                    winOrLose = true;
+                    Intent i = new Intent(getApplicationContext(), FinishActivity.class);
+                    i.putExtra("WinOrLose", winOrLose);
+                    Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
+                    Log.v(getString(R.string.shortcut), getString(R.string.inputDetected));
+                    startActivity(i);
+                }
             }
         });
 
@@ -212,6 +227,14 @@ public class PlayManuallyActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
                 Log.v(getString(R.string.down), getString(R.string.inputDetected));
                 statePlaying.keyDown(Constants.UserInput.DOWN, 0);
+                if(!maze.isValidPosition(statePlaying.px,statePlaying.py)) {
+                    winOrLose = true;
+                    Intent i = new Intent(getApplicationContext(), FinishActivity.class);
+                    i.putExtra("WinOrLose", winOrLose);
+                    Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
+                    Log.v(getString(R.string.shortcut), getString(R.string.inputDetected));
+                    startActivity(i);
+                }
             }
         });
 
