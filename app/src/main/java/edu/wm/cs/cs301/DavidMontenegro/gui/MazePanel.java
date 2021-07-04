@@ -124,7 +124,7 @@ public class MazePanel extends View implements P5Panel {
 
 	@Override
 	public void addMarker(float x, float y, String str) {
-		paint.setTextSize(25);
+		paint.setTextSize(17);
 		canvas.drawText(str, x, y, paint);
 	}
 

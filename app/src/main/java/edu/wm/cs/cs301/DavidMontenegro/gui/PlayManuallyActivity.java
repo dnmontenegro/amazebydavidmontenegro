@@ -35,6 +35,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
     private String mazeMode;
     private Maze maze;
     private StatePlaying statePlaying;
+    private int path;
 
     /**
      * This method runs upon the creation of the activity. The method's intended purpose
@@ -63,6 +64,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
         statePlaying = new StatePlaying();
         statePlaying.setMazeConfiguration(maze);
         statePlaying.start(mazePanel);
+        path = 0;
 
         wholeMazeMan.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             /**
@@ -167,10 +169,12 @@ public class PlayManuallyActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
                 Log.v(getString(R.string.up), getString(R.string.inputDetected));
                 statePlaying.keyDown(Constants.UserInput.UP, 0);
+                path++;
                 if(!maze.isValidPosition(statePlaying.px,statePlaying.py)) {
                     winOrLose = true;
                     Intent i = new Intent(getApplicationContext(), FinishActivity.class);
                     i.putExtra("WinOrLose", winOrLose);
+                    i.putExtra("PathLength", path);
                     Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
                     Log.v(getString(R.string.shortcut), getString(R.string.inputDetected));
                     startActivity(i);
@@ -227,10 +231,12 @@ public class PlayManuallyActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
                 Log.v(getString(R.string.down), getString(R.string.inputDetected));
                 statePlaying.keyDown(Constants.UserInput.DOWN, 0);
+                path++;
                 if(!maze.isValidPosition(statePlaying.px,statePlaying.py)) {
                     winOrLose = true;
                     Intent i = new Intent(getApplicationContext(), FinishActivity.class);
                     i.putExtra("WinOrLose", winOrLose);
+                    i.putExtra("PathLength", path);
                     Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
                     Log.v(getString(R.string.shortcut), getString(R.string.inputDetected));
                     startActivity(i);

@@ -315,7 +315,7 @@ public class CompassRose {
 	 * @param str The string to draw
 	 */
     private void drawMarker(MazePanel panel, float x, float y, String str) {
-		panel.addMarker(x, y, str);
+		panel.addMarker(x-6, y+6, str);
         
     }
 }
