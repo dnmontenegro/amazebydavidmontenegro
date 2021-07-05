@@ -13,7 +13,7 @@ import edu.wm.cs.cs301.DavidMontenegro.R;
 public class FinishActivity extends AppCompatActivity {
 
     private int path;
-    private int energy;
+    private float energy;
     private boolean winOrLose;
     private TextView tPath;
     private TextView finPath;
@@ -33,7 +33,7 @@ public class FinishActivity extends AppCompatActivity {
         setContentView(R.layout.activity_finish);
 
         path = getIntent().getIntExtra("PathLength", 0);
-        energy = getIntent().getIntExtra("EnergyConsumption", 0);
+        energy = getIntent().getFloatExtra("EnergyConsumption", 0);
         winOrLose = getIntent().getBooleanExtra("WinOrLose", true);
         tPath = (TextView) findViewById(R.id.tPath);
         finPath = (TextView) findViewById(R.id.finPath);

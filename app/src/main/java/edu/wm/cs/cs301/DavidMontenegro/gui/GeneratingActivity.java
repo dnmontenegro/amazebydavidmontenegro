@@ -79,6 +79,12 @@ public class GeneratingActivity extends AppCompatActivity implements Order {
             @Override
             public void run() {
                 while(percentdone < 100) {
+                    try {
+                        Thread.sleep(100);
+                    }
+                    catch (InterruptedException e) {
+                        return;
+                    }
                     mazeProgress.setProgress(percentdone);
                     runOnUiThread(new Runnable() {
                         /**

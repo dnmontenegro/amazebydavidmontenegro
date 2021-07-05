@@ -1,9 +1,11 @@
 package edu.wm.cs.cs301.DavidMontenegro.gui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,19 +16,28 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import edu.wm.cs.cs301.DavidMontenegro.R;
+import edu.wm.cs.cs301.DavidMontenegro.generation.Maze;
+import edu.wm.cs.cs301.DavidMontenegro.generation.Order;
 
 public class PlayAnimationActivity extends AppCompatActivity {
 
     private ToggleButton wholeMazeAni;
     private ToggleButton solutionAni;
     private ToggleButton visibleWallsAni;
-    private Button shortcutAni;
+    //private Button shortcutAni;
+    private MazePanel mazePanelAni;
     private TextView remainingEnergy;
     private ProgressBar energyProgress;
-    private Button start;
+    private ToggleButton start;
     private int path;
-    private int energy;
+    private float energy;
     private boolean winOrLose;
+    private String mazeMode;
+    private Maze maze;
+    private StatePlaying statePlaying;
+    private Thread driving;
+    private BasicRobot basicRobot;
+    private RobotDriver robotDriver;
 
     /**
      * This method runs upon the creation of the activity. The method's intended purpose
@@ -41,14 +52,38 @@ public class PlayAnimationActivity extends AppCompatActivity {
         wholeMazeAni = (ToggleButton) findViewById(R.id.wholeMazeAni);
         solutionAni = (ToggleButton) findViewById(R.id.solutionAni);
         visibleWallsAni = (ToggleButton) findViewById(R.id.visibleWallsAni);
-        shortcutAni= (Button) findViewById(R.id.shortcutAni);
+        //shortcutAni= (Button) findViewById(R.id.shortcutAni);
+        mazePanelAni = (MazePanel) findViewById(R.id.mazePanelAni);
         remainingEnergy = (TextView) findViewById(R.id.remainingEnergy);
         energyProgress = (ProgressBar) findViewById(R.id.energyProgress);
-        start = (Button) findViewById(R.id.start);
+        start = (ToggleButton) findViewById(R.id.start);
         path = 0;
         energy = 0;
         winOrLose = false;
-        energyProgress.setProgress(100);
+        energyProgress.setMax(2000);
+        energyProgress.setProgress(2000);
+        mazeMode = getIntent().getStringExtra("MazeMode");
+        maze = GeneratingActivity.getMaze();
+        assert maze != null : "maze must be present";
+        statePlaying = new StatePlaying();
+        statePlaying.setMazeConfiguration(maze);
+        statePlaying.start(mazePanelAni);
+        basicRobot = new BasicRobot();
+        basicRobot.setState(statePlaying);
+        switch (mazeMode) {
+            case "Wall Follower":
+                robotDriver = new WallFollower();
+                break;
+            case "Wizard":
+                robotDriver = new Wizard();
+                break;
+        }
+        robotDriver.setRobot(basicRobot);
+        robotDriver.setMaze(maze);
+        BasicSensor sensorForward = new BasicSensor();
+        basicRobot.addDistanceSensor(sensorForward, Robot.Direction.FORWARD);
+        BasicSensor sensorLeft = new BasicSensor();
+        basicRobot.addDistanceSensor(sensorLeft, Robot.Direction.LEFT);
 
         wholeMazeAni.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             /**
@@ -61,14 +96,16 @@ public class PlayAnimationActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
-                    wholeMazeAni.setBackgroundColor(getResources().getColor(R.color.green));
+                    wholeMazeAni.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.green));
                     Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
                     Log.v(getString(R.string.wholeMaze), Boolean.toString(isChecked));
+                    statePlaying.keyDown(Constants.UserInput.TOGGLEFULLMAP, 0);
                 }
                 else {
-                    wholeMazeAni.setBackgroundColor(getResources().getColor(R.color.red));
+                    wholeMazeAni.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.red));
                     Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
                     Log.v(getString(R.string.wholeMaze), Boolean.toString(isChecked));
+                    statePlaying.keyDown(Constants.UserInput.TOGGLEFULLMAP, 0);
                 }
             }
         });
@@ -84,14 +121,16 @@ public class PlayAnimationActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
-                    solutionAni.setBackgroundColor(getResources().getColor(R.color.green));
+                    solutionAni.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.green));
                     Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
                     Log.v(getString(R.string.solution), Boolean.toString(isChecked));
+                    statePlaying.keyDown(Constants.UserInput.TOGGLESOLUTION, 0);
                 }
                 else {
-                    solutionAni.setBackgroundColor(getResources().getColor(R.color.red));
+                    solutionAni.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.red));
                     Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
                     Log.v(getString(R.string.solution), Boolean.toString(isChecked));
+                    statePlaying.keyDown(Constants.UserInput.TOGGLESOLUTION, 0);
                 }
             }
         });
@@ -107,24 +146,26 @@ public class PlayAnimationActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
-                    visibleWallsAni.setBackgroundColor(getResources().getColor(R.color.green));
+                    visibleWallsAni.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.green));
                     Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
                     Log.v(getString(R.string.visible), Boolean.toString(isChecked));
+                    statePlaying.keyDown(Constants.UserInput.TOGGLELOCALMAP, 0);
                 }
                 else {
-                    visibleWallsAni.setBackgroundColor(getResources().getColor(R.color.red));
+                    visibleWallsAni.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.red));
                     Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
                     Log.v(getString(R.string.visible), Boolean.toString(isChecked));
+                    statePlaying.keyDown(Constants.UserInput.TOGGLELOCALMAP, 0);
                 }
             }
         });
 
-        shortcutAni.setOnClickListener(new View.OnClickListener() {
-            /**
+        /*shortcutAni.setOnClickListener(new View.OnClickListener() {
+            *//**
              * This method advances the user to the finish activity. It is a placeholder for
              * the maze.
              * @param v
-             */
+             *//*
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), FinishActivity.class);
@@ -135,18 +176,85 @@ public class PlayAnimationActivity extends AppCompatActivity {
                 Log.v(getString(R.string.shortcut), getString(R.string.inputDetected));
                 startActivity(i);
             }
-        });
+        });*/
 
-        start.setOnClickListener(new View.OnClickListener() {
+        start.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             /**
              * This method's intended purpose is to allow the user to start the exploration of the
              * maze by the robot and to pause te animation.
-             * @param v
+             * @param buttonView
+             * @param isChecked
              */
             @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
-                Log.v(getString(R.string.start), getString(R.string.inputDetected));
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+                    start.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.green));
+                    Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
+                    Log.v(getString(R.string.start), Boolean.toString(isChecked));
+                    start.setEnabled(false);
+                    driving.start();
+                }
+                else {
+                    start.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.green));
+                    Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
+                    Log.v(getString(R.string.stop), Boolean.toString(isChecked));
+                }
+            }
+        });
+        driving = new Thread(new Runnable() {
+            /**
+             * This method's intended purpose is to mimic maze generation by incrementally
+             * increasing the progress of the progressbar.
+             */
+            @Override
+            public void run() {
+                while(!basicRobot.isAtExit()) {
+                    try {
+                        Thread.sleep(10);
+                    }
+                    catch (InterruptedException e) {
+                        return;
+                    }
+                    try {
+                        robotDriver.drive1Step2Exit();
+                        energyProgress.setProgress((int) basicRobot.getBatteryLevel());
+                    } catch (Exception e) {
+                        winOrLose = false;
+                        Intent i = new Intent(getApplicationContext(), FinishActivity.class);
+                        i.putExtra("WinOrLose", winOrLose);
+                        i.putExtra("PathLength", path);
+                        i.putExtra("EnergyConsumption", energy);
+                        startActivity(i);
+                    }
+                }
+                try {
+                    robotDriver.drive1Step2Exit();
+                    energyProgress.setProgress((int) basicRobot.getBatteryLevel());
+                } catch (Exception e) {
+                    winOrLose = false;
+                    Intent i = new Intent(getApplicationContext(), FinishActivity.class);
+                    i.putExtra("WinOrLose", winOrLose);
+                    i.putExtra("PathLength", path);
+                    i.putExtra("EnergyConsumption", energy);
+                    startActivity(i);
+                }
+                try {
+                    Thread.sleep(1000);
+                }
+                catch (InterruptedException e) {
+                    return;
+                }
+                path = robotDriver.getPathLength();
+                energy = robotDriver.getEnergyConsumption();
+                energyProgress.setProgress((int) basicRobot.getBatteryLevel());
+                if(basicRobot.canSeeThroughTheExitIntoEternity(Robot.Direction.FORWARD)) {
+                    winOrLose = true;
+                    Intent i = new Intent(getApplicationContext(), FinishActivity.class);
+                    i.putExtra("WinOrLose", winOrLose);
+                    i.putExtra("PathLength", path);
+                    i.putExtra("EnergyConsumption", energy);
+                    startActivity(i);
+                }
             }
         });
     }
@@ -155,6 +263,7 @@ public class PlayAnimationActivity extends AppCompatActivity {
      */
     @Override
     public void onBackPressed(){
+        driving.interrupt();
         Intent i = new Intent(getApplicationContext(), AMazeActivity.class);
         Toast.makeText(getApplicationContext(), R.string.inputDetected, Toast.LENGTH_SHORT).show();
         Log.v(getString(R.string.back), getString(R.string.inputDetected));
