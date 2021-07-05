@@ -52,15 +52,11 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/shortcutAni"
-        android:layout_width="130dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="230dp"
-        android:background="@color/red"
-        android:text="@string/shortcut"
-        android:textColor="@color/white"
-        android:textSize="15sp"
+    <edu.wm.cs.cs301.DavidMontenegro.gui.MazePanel
+        android:id="@+id/mazePanelAni"
+        android:layout_width="325dp"
+        android:layout_height="325dp"
+        android:layout_marginTop="72dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -69,14 +65,14 @@
         android:id="@+id/remainingEnergy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="15dp"
         android:padding="18dp"
         android:text="@string/energy"
         android:textColor="@color/red"
         android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/shortcutAni" />
+        app:layout_constraintTop_toBottomOf="@id/mazePanelAni" />
 
     <ProgressBar
         android:id="@+id/energyProgress"
@@ -87,13 +83,15 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/remainingEnergy" />
 
-    <Button
+    <ToggleButton
         android:id="@+id/start"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="55dp"
+        android:checked="false"
         android:background="@color/red"
-        android:text="@string/start"
+        android:textOff="@string/start"
+        android:textOn="@string/stop"
         android:textColor="@color/white"
         android:textSize="15sp"
         app:layout_constraintLeft_toLeftOf="parent"

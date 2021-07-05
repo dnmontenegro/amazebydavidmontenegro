@@ -55,6 +55,8 @@ public class GeneratingActivity extends AppCompatActivity implements Order {
         randomSeed = getIntent().getIntExtra("Seed", 0);
         percentdone = 0;
 
+        mazeRooms = !mazeRooms;
+
         switch (mazeAlgorithm) {
             case "DFS":
                 builder = Builder.DFS;
